@@ -117,13 +117,13 @@
     End Sub
 
     Private Sub ComboBox1_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedValueChanged
-        If LCase(CheckBox1.Text) = "access 2007 to 2010" Then
+        If LCase(ComboBox1.Text) = "access 2007 to 2010" Then
             CheckBox1.Enabled = True
         End If
     End Sub
 
     Private Sub ComboBox2_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedValueChanged
-        If LCase(CheckBox2.Text) = "access 2007 to 2010" Then
+        If LCase(ComboBox2.Text) = "access 2007 to 2010" Then
             CheckBox2.Enabled = True
         End If
     End Sub
