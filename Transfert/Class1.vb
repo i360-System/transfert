@@ -1,6 +1,14 @@
 ﻿Module Class1
 
-
+    Public Property pass As String
+        Set(ByVal value As String)
+            _pass = value
+        End Set
+        Get
+            Return _pass
+        End Get
+    End Property
+    Private _pass As String
 
     Public Property da As String
         Set(ByVal value As String)
