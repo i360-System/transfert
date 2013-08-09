@@ -90,6 +90,7 @@
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         OpenFileDialog2.ShowDialog()
         Class1.a = OpenFileDialog2.FileName
+        TextBox2.Text = OpenFileDialog2.FileName
     End Sub
 
     Public Sub New()
