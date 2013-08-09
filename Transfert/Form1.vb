@@ -19,7 +19,7 @@
         Try
 
             If Not IsNothing(Class1.da) Then
-                Select Case LCase(Class1.da.ToString)
+                Select Case LCase(ComboBox1.SelectedItem)
                     Case "access 2007 to 2010"
                         Me.doneAcsCns(0)
                     Case "sql"
@@ -31,7 +31,7 @@
                 MsgBox("Specificare un percorso di provenienza.")
                 Exit Sub
             End If
-            Select Case LCase(a.ToString)
+            Select Case LCase(ComboBox2.SelectedItem)
                 Case "access 2007 to 2010"
                     Me.doneAcsCns(1)
             End Select
@@ -51,6 +51,7 @@
             Dim dp2 As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb2)
             Dim es As New DataSet1 : Dim tb As New DataTable : Dim es2 As New DataSet2 : Dim tb2 As New DataTable
             dp.Fill(es, "Anagraficastudio")
+
             tb = es.Tables("Anagraficastudio")
             ProgressBar1.Step = 1 : ProgressBar1.Value = 0
             ProgressBar1.Maximum = es.Tables("anagraficastudio").Rows.Count
@@ -58,7 +59,7 @@
                 es2.Tables("anagraficastudio").ImportRow(r)
                 ProgressBar1.PerformStep() : ProgressBar1.Refresh()
             Next
-
+            dp2.Update(es2)
 
 
         Catch ex As Exception
@@ -69,14 +70,14 @@
     Private Sub doneAcsCns(ByVal c As Single)
         If c = 0 Then
 
-            If CheckBox1.CheckState Then
+            If CheckBox1.CheckState = 0 Then
                 oldb1.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Persist Security Info=False;"
             Else
                 LoginForm1.ShowDialog()
                 oldb1.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Jet OLEDB:Database Password=" & Class1.pass.ToString & ";"
             End If
         Else
-            If CheckBox2.CheckState Then
+            If CheckBox2.CheckState = 0 Then
                 oldb2.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Persist Security Info=False;"
             Else
                 LoginForm1.ShowDialog()
