@@ -127,6 +127,7 @@ Partial Class Form1
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.ComboBox1.Location = New System.Drawing.Point(464, 32)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
@@ -135,6 +136,7 @@ Partial Class Form1
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.ComboBox2.Location = New System.Drawing.Point(464, 64)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 21)

@@ -1,4 +1,6 @@
-﻿Public Class Form1
+﻿Imports System.Data.OleDb
+
+Public Class Form1
     Dim oldb1 As New OleDb.OleDbConnection
     Dim oldb2 As New OleDb.OleDbConnection
 
@@ -8,6 +10,7 @@
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        OpenFileDialog1.FileName = Nothing
         OpenFileDialog1.ShowDialog()
         Class1.da = OpenFileDialog1.FileName
         TextBox1.Text = Class1.da
@@ -15,51 +18,62 @@
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
 
+        If Not (TextBox1.Text = "") And Not (TextBox2.Text = "") And Not (ComboBox1.Text = "") And Not (ComboBox2.Text = "") Then
+            Try
 
-        Try
-
-            If Not IsNothing(Class1.da) Then
-                Select Case LCase(ComboBox1.SelectedItem)
+                If Not IsNothing(Class1.da) Then
+                    Select Case LCase(ComboBox1.SelectedItem)
+                        Case "access 2007 to 2010"
+                            Me.doneAcsCns(0)
+                        Case "sql"
+                            'todo other database
+                            'case
+                            'instruction
+                    End Select
+                Else
+                    MsgBox("Specificare un percorso di provenienza.")
+                    Exit Sub
+                End If
+                Select Case LCase(ComboBox2.SelectedItem)
                     Case "access 2007 to 2010"
-                        Me.doneAcsCns(0)
-                    Case "sql"
-                        'todo other database
-                        'case
-                        'instruction
+                        Me.doneAcsCns(1)
                 End Select
-            Else
-                MsgBox("Specificare un percorso di provenienza.")
-                Exit Sub
-            End If
-            Select Case LCase(ComboBox2.SelectedItem)
-                Case "access 2007 to 2010"
-                    Me.doneAcsCns(1)
-            End Select
-            Todo()
-        Catch ex As Exception
-            MsgBox(e.ToString)
-        End Try
+                Todo()
+            Catch ex As Exception
+                MsgBox(e.ToString)
+            End Try
+        Else
+            MsgBox("Devi compilare correttamente tutti i campi")
+        End If
     End Sub
 
     Private Sub Todo()
 
 
-        If oldb1.State Then oldb1.Open()
+        If oldb1.State = 0 Then oldb1.Open()
+        If oldb2.State = 0 Then oldb2.Open()
 
         Try
             Dim dp As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb1)
             Dim dp2 As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb2)
             Dim es As New DataSet1 : Dim tb As New DataTable : Dim es2 As New DataSet2 : Dim tb2 As New DataTable
-            dp.Fill(es, "Anagraficastudio")
+            Dim builder As OleDbCommandBuilder
 
-            tb = es.Tables("Anagraficastudio")
+
+            dp.Fill(es, "Anagraficastudio")
+            dp2.Fill(es2, "Anagraficastudio")
+            builder = New OleDbCommandBuilder(dp2)
+            'tb = es.Tables("Anagraficastudio")
             ProgressBar1.Step = 1 : ProgressBar1.Value = 0
             ProgressBar1.Maximum = es.Tables("anagraficastudio").Rows.Count
-            For Each r As DataRow In es.Tables("anagraficastudio").Rows
+
+            For Each r As DataRow In tb.Rows 'es.Tables("anagraficastudio").Rows
                 es2.Tables("anagraficastudio").ImportRow(r)
                 ProgressBar1.PerformStep() : ProgressBar1.Refresh()
             Next
-            dp2.Update(es2)
+
+            builder.GetUpdateCommand()
+            dp2.Update(es2, "Anagraficastudio")
 
 
         Catch ex As Exception
@@ -89,6 +103,7 @@
 
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        OpenFileDialog1.FileName = Nothing
         OpenFileDialog2.ShowDialog()
         Class1.a = OpenFileDialog2.FileName
         TextBox2.Text = OpenFileDialog2.FileName
