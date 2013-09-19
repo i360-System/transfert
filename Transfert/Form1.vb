@@ -26,6 +26,7 @@ Public Class Form1
                         Case "access 2007 to 2010"
                             Me.doneAcsCns(0)
                         Case "sql"
+
                             'todo other database
                             'case
                             'instruction
@@ -57,28 +58,35 @@ Public Class Form1
             Dim dp As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb1)
             Dim dp2 As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb2)
             Dim es As New DataSet1 : Dim tb As New DataTable : Dim es2 As New DataSet2 : Dim tb2 As New DataTable
-            Dim builder As OleDbCommandBuilder
+            'Dim builder As OleDbCommandBuilder
 
+            dp.FillSchema(es, SchemaType.Source, "AnagraficaStudio")
+            dp.Fill(es, "AnagraficaStudio")
+            dp2.FillSchema(es2, SchemaType.Source, "AnagraficaStudio")
+            dp2.Fill(es2, "AnagraficaStudio")
 
-            dp.Fill(es, "Anagraficastudio")
-            dp2.Fill(es2, "Anagraficastudio")
-            builder = New OleDbCommandBuilder(dp2)
-            'tb = es.Tables("Anagraficastudio")
-            ProgressBar1.Step = 1 : ProgressBar1.Value = 0
-            ProgressBar1.Maximum = es.Tables("anagraficastudio").Rows.Count
+            'dp.Fill(es, "AnagraficaStudio")
+            'dp2.Fill(es2, "AnagraficaStudio")
 
-            For Each r As DataRow In tb.Rows 'es.Tables("anagraficastudio").Rows
-                es2.Tables("anagraficastudio").ImportRow(r)
-                ProgressBar1.PerformStep() : ProgressBar1.Refresh()
-            Next
+            es2.Merge(es)
+            'builder = New OleDbCommandBuilder(dp2)
+            ''tb = es.Tables("Anagraficastudio")
+            'ProgressBar1.Step = 1 : ProgressBar1.Value = 0
+            'ProgressBar1.Maximum = es.Tables("anagraficastudio").Rows.Count
 
-            builder.GetUpdateCommand()
-            dp2.Update(es2, "Anagraficastudio")
+            'For Each r As DataRow In tb.Rows 'es.Tables("anagraficastudio").Rows
+            '    es2.Tables("anagraficastudio").ImportRow(r)
+            '    ProgressBar1.PerformStep() : ProgressBar1.Refresh()
+            'Next
+
+            'builder.GetUpdateCommand()
+            dp2.Update(es2, "AnagraficaStudio")
 
 
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
+        oldb1.Close() : oldb2.Close()
     End Sub
 
     Private Sub doneAcsCns(ByVal c As Single)
@@ -90,7 +98,7 @@ Public Class Form1
                 LoginForm1.ShowDialog()
                 oldb1.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Jet OLEDB:Database Password=" & Class1.pass.ToString & ";"
             End If
-        Else
+        ElseIf c = 1 Then
             If CheckBox2.CheckState = 0 Then
                 oldb2.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Persist Security Info=False;"
             Else
@@ -103,7 +111,7 @@ Public Class Form1
 
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        OpenFileDialog1.FileName = Nothing
+        OpenFileDialog2.FileName = Nothing
         OpenFileDialog2.ShowDialog()
         Class1.a = OpenFileDialog2.FileName
         TextBox2.Text = OpenFileDialog2.FileName
