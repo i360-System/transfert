@@ -50,43 +50,54 @@ Public Class Form1
 
     Private Sub Todo()
 
-
-        If oldb1.State = 0 Then oldb1.Open()
+        Dim righe As Integer = 0
+        'If oldb1.State = 0 Then oldb1.Open()
         If oldb2.State = 0 Then oldb2.Open()
 
         Try
-            Dim dp As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb1)
-            Dim dp2 As New OleDb.OleDbDataAdapter("select * from anagraficastudio", oldb2)
-            Dim es As New DataSet1 : Dim tb As New DataTable : Dim es2 As New DataSet2 : Dim tb2 As New DataTable
+            Dim cmd As New OleDbCommand()
+            cmd.Connection = oldb2
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = "INSERT INTO AnagraficaStudio SELECT * FROM AnagraficaStudio IN '" & Class1.da.ToString & "'"
+            'Dim dp As New OleDb.OleDbDataAdapter()
+            'Dim dp2 As New OleDb.OleDbDataAdapter()
+            ' Dim es As New DataSet1 : 'Dim tb As New DataTable : 'Dim es2 As New DataSet2 :' Dim tb2 As New DataTable
             'Dim builder As OleDbCommandBuilder
 
-            dp.FillSchema(es, SchemaType.Source, "AnagraficaStudio")
-            dp.Fill(es, "AnagraficaStudio")
-            dp2.FillSchema(es2, SchemaType.Source, "AnagraficaStudio")
-            dp2.Fill(es2, "AnagraficaStudio")
+            'dp.SelectCommand = New OleDbCommand(INSERT INTO table SELECT * FROM table IN "c:\temp\source.mdb", oldb1)
+            'dp2.SelectCommand = New OleDbCommand("select * from anagraficastudio", oldb2)
+            'Dim builder As OleDbCommandBuilder = New OleDbCommandBuilder(dp2)
+            righe = cmd.ExecuteNonQuery()
 
+            'dp.FillSchema(es, SchemaType.Source, "AnagraficaStudio")
             'dp.Fill(es, "AnagraficaStudio")
+            'dp2.FillSchema(es2, SchemaType.Source, "AnagraficaStudio")
             'dp2.Fill(es2, "AnagraficaStudio")
-
-            es2.Merge(es)
+            'Dim pap = es.Tables("AnagraficaStudio").Rows
+            ''dp.Fill(es, "AnagraficaStudio")
+            ''dp2.Fill(es2, "AnagraficaStudio")
+            'For Each r As DataRow In pap
+            '    es2.Tables("AnagraficaStudio").Rows.Add(r)
+            'Next
+            'es2.Merge(es)
             'builder = New OleDbCommandBuilder(dp2)
             ''tb = es.Tables("Anagraficastudio")
             'ProgressBar1.Step = 1 : ProgressBar1.Value = 0
             'ProgressBar1.Maximum = es.Tables("anagraficastudio").Rows.Count
-
             'For Each r As DataRow In tb.Rows 'es.Tables("anagraficastudio").Rows
             '    es2.Tables("anagraficastudio").ImportRow(r)
             '    ProgressBar1.PerformStep() : ProgressBar1.Refresh()
             'Next
 
             'builder.GetUpdateCommand()
-            dp2.Update(es2, "AnagraficaStudio")
-
+            'dp2.UpdateCommand = builder.GetUpdateCommand()
+            'dp2.Update(es2.Tables("AnagraficaStudio"))
 
         Catch ex As Exception
-            MsgBox(ex.ToString)
+            MsgBox(ex.ToString & vbCrLf & vbCrLf & "Importazione annullata.")
         End Try
         oldb1.Close() : oldb2.Close()
+        If righe > 0 Then MsgBox("Importazione avvenuta con successo." & vbCrLf & "Sono state elaborate " & righe & " righe, della tabella AnagraficaStudio")
     End Sub
 
     Private Sub doneAcsCns(ByVal c As Single)
@@ -100,10 +111,10 @@ Public Class Form1
             End If
         ElseIf c = 1 Then
             If CheckBox2.CheckState = 0 Then
-                oldb2.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Persist Security Info=False;"
+                oldb2.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.a.ToString & ";Persist Security Info=False;"
             Else
                 LoginForm1.ShowDialog()
-                oldb2.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.da.ToString & ";Jet OLEDB:Database Password=" & Class1.pass.ToString & ";"
+                oldb2.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Class1.a.ToString & ";Jet OLEDB:Database Password=" & Class1.pass.ToString & ";"
             End If
         End If   '
 
