@@ -131,6 +131,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
@@ -164,6 +165,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\download.jpg" />
     <Content Include="transfert.ico" />
   </ItemGroup>
   <ItemGroup>

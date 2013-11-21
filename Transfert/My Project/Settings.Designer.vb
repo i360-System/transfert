@@ -53,6 +53,102 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Da() As String
+            Get
+                Return CType(Me("Da"),String)
+            End Get
+            Set
+                Me("Da") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property A() As String
+            Get
+                Return CType(Me("A"),String)
+            End Get
+            Set
+                Me("A") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property credenzialiDa() As Boolean
+            Get
+                Return CType(Me("credenzialiDa"),Boolean)
+            End Get
+            Set
+                Me("credenzialiDa") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property credenzialiA() As Boolean
+            Get
+                Return CType(Me("credenzialiA"),Boolean)
+            End Get
+            Set
+                Me("credenzialiA") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property userDa() As String
+            Get
+                Return CType(Me("userDa"),String)
+            End Get
+            Set
+                Me("userDa") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property passDa() As String
+            Get
+                Return CType(Me("passDa"),String)
+            End Get
+            Set
+                Me("passDa") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property userA() As String
+            Get
+                Return CType(Me("userA"),String)
+            End Get
+            Set
+                Me("userA") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property passA() As String
+            Get
+                Return CType(Me("passA"),String)
+            End Get
+            Set
+                Me("passA") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
