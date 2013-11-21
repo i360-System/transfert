@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' Controllare i valori degli attributi dell'assembly
 
 <Assembly: AssemblyTitle("Transfert")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyDescription("Software di trasferimento dati tra due database")> 
+<Assembly: AssemblyCompany("i360")> 
 <Assembly: AssemblyProduct("Transfert")> 
 <Assembly: AssemblyCopyright("Copyright ©  2013")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("i360")> 
 
 <Assembly: ComVisible(False)>
 

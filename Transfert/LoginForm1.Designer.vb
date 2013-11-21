@@ -42,7 +42,7 @@ Partial Class LoginForm1
         '
         'LogoPictureBox
         '
-        Me.LogoPictureBox.Image = Global.Transfert.My.Resources.Resources.download
+        Me.LogoPictureBox.Image = Global.TransfertDbToDb.My.Resources.Resources.download
         Me.LogoPictureBox.Location = New System.Drawing.Point(0, 0)
         Me.LogoPictureBox.Name = "LogoPictureBox"
         Me.LogoPictureBox.Size = New System.Drawing.Size(192, 183)
